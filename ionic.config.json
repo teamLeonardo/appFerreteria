@@ -1,0 +1,7 @@
+{
+  "name": "appFerreteria",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
