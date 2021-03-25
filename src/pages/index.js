@@ -10,8 +10,9 @@ import {
 import LayoutDashboard from "../components/LayoutDashboard";
 import "./style.css"
 import { ROUTER } from "./router";
-import Dashboard from "./app/dashboard";
 import Cliente from "./app/cliente";
+// import Dashboard from "./app/dashboard";
+// import Cliente from "./app/cliente";
 
 const RouterValidate = ({ component: Component, estado, ...rest }) => {
 
@@ -47,9 +48,10 @@ const RouterValidate = ({ component: Component, estado, ...rest }) => {
 export default () => {
     return <Router>
         <Switch>
+
             <RouterValidate estado="public" path={ROUTER.login.page} component={() => <div>login <Link to={ROUTER.app.page.dashboard} > go to  dash</Link></div>} />
             <RouterValidate estado="public" path={ROUTER.register.page} component={() => <div>register <Link to={ROUTER.app.page.dashboard} > go to  dash</Link></div>} />
-            <RouterValidate estado="private" path={ROUTER.app.page.dashboard} component={() => <Dashboard />} />
+            <RouterValidate estado="private" path={ROUTER.app.page.dashboard} component={() => <div>app</div>} />
             <RouterValidate estado="private" path={ROUTER.app.page.venta} component={() => <div>app</div>} />
             <RouterValidate estado="private" path={ROUTER.app.page.cliente} component={() => <Cliente />} />
             <RouterValidate estado="private" path={ROUTER.app.page.personal} component={() => <div>app</div>} />

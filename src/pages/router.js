@@ -1,5 +1,5 @@
 
-const PATH_APP = "/app/"
+export const PATH_APP = "/app/"
 
 export const ROUTER = {
     login: {

@@ -1,62 +1,77 @@
-import { Layout, Menu } from 'antd';
-import { UserOutlined, MailOutlined } from '@ant-design/icons';
-import { useHistory, useLocation } from 'react-router';
-import { ROUTER } from '../pages/router';
-import SubMenu from 'antd/lib/menu/SubMenu';
 
-const { Header, Content, Footer, Sider } = Layout;
+import { useHistory, useLocation } from 'react-router';
+import { ROUTER , PATH_APP} from '../pages/router';
+// import * from "r"
+import { Container, Header, Content, Sidebar, Nav, Dropdown, Sidenav, Icon } from 'rsuite';
 
 
 export default ({ children }) => {
 
     let { pathname } = useLocation()
     let { push } = useHistory()
-
+    let ar = Object.values(ROUTER.app.page).map(value => value.split(PATH_APP)[1] !== "dashboard" ? value.split(PATH_APP)[1] : null)
+    let validacion = ar.indexOf(pathname.split(PATH_APP)[1]) > -1 ? "manteniminento" : "3"
     return (
-        <Layout style={{ minHeight: '100vh' }}>
-            <Sider
-                breakpoint="lg"
-                collapsedWidth="0"
-                onBreakpoint={broken => {
-                    console.log(broken);
-                }}
-                onCollapse={(collapsed, type) => {
-                    console.log(collapsed, type);
-                }}
-            >
-                <div className="logo" />
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathname]}>
-                    <Menu.Item key={ROUTER.app.page.dashboard} icon={<UserOutlined />} onClick={() => push(ROUTER.app.page.dashboard)}>
-                        {ROUTER.app.page.dashboard.split("/app/")[1]}
-                    </Menu.Item>
-                    <SubMenu key="sub1" icon={<MailOutlined />} title="Mantenimiento">
-                        <Menu.Item key={ROUTER.app.page.venta} onClick={() => push(ROUTER.app.page.venta)}>
-                            {ROUTER.app.page.venta.split("/app/")[1]}
-                        </Menu.Item>
-                        <Menu.Item key={ROUTER.app.page.cliente} onClick={() => push(ROUTER.app.page.cliente)}>
-                            {ROUTER.app.page.cliente.split("/app/")[1]}
-                        </Menu.Item>
-                        <Menu.Item key={ROUTER.app.page.compra} onClick={() => push(ROUTER.app.page.compra)}>
-                            {ROUTER.app.page.compra.split("/app/")[1]}
-                        </Menu.Item>
+        <div className="show-fake-browser sidebar-page" style={{ height: "100% !important" }}  >
+            <Container style={{ height: "100% !important" }}>
+                <Sidebar
+                    style={{ display: 'flex', flexDirection: 'column' }}
+                    width={true ? 260 : 56}
+                    collapsible
+                    style={{ height: "100%" }}
+                >
+                    <Sidenav defaultOpenKeys={[validacion]} expanded={true} appearance="subtle">
 
-                        <Menu.Item key={ROUTER.app.page.personal} onClick={() => push(ROUTER.app.page.personal)}>
-                            {ROUTER.app.page.personal.split("/app/")[1]}
-                        </Menu.Item>
-                        <Menu.Item key={ROUTER.app.page.provedor} onClick={() => push(ROUTER.app.page.provedor)}>
-                            {ROUTER.app.page.provedor.split("/app/")[1]}
-                        </Menu.Item>
-                    </SubMenu>
-                </Menu>
-            </Sider>
-            <Layout >
-                <Content >
-                    <div className="" style={{ margin: 24, padding: 24, minHeight: "calc(100% - 48px)", overflowy: "auto" }}>
-                        {children}
-                    </div>
-                </Content>
-            </Layout>
-        </ Layout>
+                        <Sidenav.Body>
+                            <Nav>
+                                <Nav.Item
+                                    eventKey={ROUTER.app.page.dashboard}
+                                    active={pathname === ROUTER.app.page.dashboard ? true : false}
+                                    icon={<Icon icon="dashboard" />}
+                                    onSelect={() => push(ROUTER.app.page.dashboard)}
+                                >
+                                    {ROUTER.app.page.dashboard.split(PATH_APP)[1]}
+                                </Nav.Item>
+
+                                <Dropdown
+                                    eventKey="manteniminento"
+                                    trigger="hover"
+                                    title="manteniminento"
+                                    icon={<Icon icon="magic" />}
+                                    placement="rightStart"
+                                >
+                                    {
+                                        Object.values(ROUTER.app.page).map((value, indx) => {
+                                            return value.split(PATH_APP)[1] !== "dashboard" && (
+                                                <Dropdown.Item
+                                                    key={indx}
+                                                    eventKey={value}
+                                                    active={pathname === value ? true : false}
+                                                    onSelect={() => push(value)}
+                                                    icon={<Icon icon="group" />}
+                                                >
+                                                    {value.split(PATH_APP)[1]}
+                                                </Dropdown.Item>
+                                            )
+                                        })
+                                    }
+
+                                </Dropdown>
+                              
+                            </Nav>
+                        </Sidenav.Body>
+                    </Sidenav>
+
+                </Sidebar>
+
+                <Container >
+                    <Header>
+                        <h2>{pathname.split("/app/")[1]}</h2>
+                    </Header>
+                    <Content>{children}</Content>
+                </Container>
+            </Container>
+        </div>
     );
 
 }

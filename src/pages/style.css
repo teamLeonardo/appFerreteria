@@ -1,3 +1,13 @@
+html, body {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#root, .show-fake-browser, .rs-container {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 .ant-layout-sider-children .logo {
     height: 32px;
     margin: 16px;
