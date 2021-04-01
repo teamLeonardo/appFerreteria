@@ -1,1 +1,1 @@
-export {default} from "./Articulo"
+export { default } from "./Articulo"

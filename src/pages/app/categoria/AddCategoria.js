@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { Button, ButtonToolbar, ControlLabel, Drawer, Form, FormControl, FormGroup, HelpBlock, Input } from "rsuite"
+import { Button, ButtonToolbar, ControlLabel, Drawer, Form, FormControl, FormGroup, HelpBlock, Input, Uploader } from "rsuite"
 import { addCategoria } from "./state"
 
 export default ({ state, hide, newdata }) => {
     const [formva, setFormVa] = useState({
         nombre: "",
-        descripcion: "",
+        descripcion: ""
     })
     return <Drawer full size="lg" placement="right" show={state} onHide={() => { hide() }}>
         <Form layout="horizontal" onChange={(value) => setFormVa(value)} formValue={formva}  >
@@ -23,6 +23,8 @@ export default ({ state, hide, newdata }) => {
                     <FormControl name="descripcion" accepter={Input} componentClass="textarea" rows={3} />
                     <HelpBlock tooltip>Requerido</HelpBlock>
                 </FormGroup>
+              
+
             </Drawer.Body>
             <Drawer.Footer>
                 <FormGroup>

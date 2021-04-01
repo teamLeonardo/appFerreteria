@@ -14,6 +14,7 @@ import Cliente from "./app/cliente";
 import Categoria from "./app/categoria";
 import Presentacion from "./app/presentacion";
 import Articulo from "./app/articulo";
+import Personal from "./app/personal";
 // import Dashboard from "./app/dashboard";
 // import Cliente from "./app/cliente";
 
@@ -60,7 +61,7 @@ export default () => {
             <RouterValidate estado="private" path={ROUTER.app.page.cliente} component={() => <Cliente />} />
             <RouterValidate estado="private" path={ROUTER.app.page.categoria} component={() => <Categoria />} />
             <RouterValidate estado="private" path={ROUTER.app.page.presentacion} component={() => <Presentacion />} />
-            <RouterValidate estado="private" path={ROUTER.app.page.personal} component={() => <div>app</div>} />
+            <RouterValidate estado="private" path={ROUTER.app.page.personal} component={() => <Personal />} />
             <RouterValidate estado="private" path={ROUTER.app.page.provedor} component={() => <div>app</div>} />
             <RouterValidate estado="private" path={ROUTER.app.page.compra} component={() => <div>app</div>} />
             <Redirect to={ROUTER.login.page} />
