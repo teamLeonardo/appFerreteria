@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Button, ButtonToolbar, ControlLabel, Drawer, Form, FormControl, FormGroup, HelpBlock, Input, SelectPicker, Uploader } from "rsuite"
+import { Button, ButtonToolbar, ControlLabel, Drawer, Form, FormControl, FormGroup, HelpBlock, Input, InputNumber, SelectPicker, Uploader } from "rsuite"
 import { BASEURL } from "../../../config.axios";
 import { editArticulo, getDataExtra } from "./state"
 
@@ -105,6 +105,19 @@ export default ({ state, hide, datos, newdata }) => {
                             />
                             <HelpBlock tooltip>Requerido</HelpBlock>
                         </FormGroup>
+                        
+                        <FormGroup>
+                            <ControlLabel>Stock</ControlLabel>
+                            <FormControl name="stock" accepter={InputNumber} />
+                            <HelpBlock tooltip>Requerido</HelpBlock>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <ControlLabel>Precio</ControlLabel>
+                            <FormControl name="precio" accepter={InputNumber} />
+                            <HelpBlock tooltip>Requerido</HelpBlock>
+                        </FormGroup>
+
                         <FormGroup>
                             <ButtonToolbar>
                                 <Button
@@ -131,5 +144,5 @@ export default ({ state, hide, datos, newdata }) => {
                 </Form>
             </Drawer >
 
-        ) 
+        )
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Button, ButtonToolbar, ControlLabel, Drawer, Form, FormControl, FormGroup, HelpBlock, Input, SelectPicker, Uploader } from "rsuite"
+import { Button, ButtonToolbar, ControlLabel, Drawer, Form, FormControl, FormGroup, HelpBlock, Input, InputNumber, SelectPicker, Uploader } from "rsuite"
 import { addArticulo, getDataExtra } from "./state"
 
 const styles = {
@@ -12,7 +12,9 @@ export default ({ state, hide, newdata }) => {
         descripcion: "",
         imagen: "",
         categoria: {},
-        presentacion: {}
+        presentacion: {},
+        stock: 0,
+        precio: 0
     })
 
     const [datosCategori, setDatosCategori] = useState([])
@@ -86,6 +88,16 @@ export default ({ state, hide, newdata }) => {
                         style={{ width: 120 }}
                         searchable={false}
                     />
+                    <HelpBlock tooltip>Requerido</HelpBlock>
+                </FormGroup>
+                <FormGroup>
+                    <ControlLabel>Stock</ControlLabel>
+                    <FormControl name="stock" accepter={InputNumber} />
+                    <HelpBlock tooltip>Requerido</HelpBlock>
+                </FormGroup>
+                <FormGroup>
+                    <ControlLabel>Precio</ControlLabel>
+                    <FormControl name="precio" accepter={InputNumber} />
                     <HelpBlock tooltip>Requerido</HelpBlock>
                 </FormGroup>
 

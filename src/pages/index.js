@@ -16,6 +16,7 @@ import Presentacion from "./app/presentacion";
 import Articulo from "./app/articulo";
 import Personal from "./app/personal";
 import Provedor from "./app/provedor";
+import Compra from "./app/compra";
 // import Dashboard from "./app/dashboard";
 // import Cliente from "./app/cliente";
 
@@ -64,7 +65,7 @@ export default () => {
             <RouterValidate estado="private" path={ROUTER.app.page.presentacion} component={() => <Presentacion />} />
             <RouterValidate estado="private" path={ROUTER.app.page.personal} component={() => <Personal />} />
             <RouterValidate estado="private" path={ROUTER.app.page.provedor} component={() => <Provedor />} />
-            <RouterValidate estado="private" path={ROUTER.app.page.compra} component={() => <div>app</div>} />
+            <RouterValidate estado="private" path={ROUTER.app.page.compra} component={() => <Compra />} />
             <Redirect to={ROUTER.login.page} />
         </Switch>
     </Router>

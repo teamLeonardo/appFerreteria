@@ -85,6 +85,17 @@ export default () => {
                 </Table.Cell>
             </Table.Column>
 
+            <Table.Column width={100}>
+                <Table.HeaderCell>Stock</Table.HeaderCell>
+                <Table.Cell dataKey="stock" />
+            </Table.Column>
+
+            <Table.Column width={100}>
+                <Table.HeaderCell>Precio</Table.HeaderCell>
+                <Table.Cell dataKey="precio" />
+            </Table.Column>
+
+
             <Table.Column width={150} fixed="right">
                 <Table.HeaderCell>Action</Table.HeaderCell>
                 <Table.Cell>
