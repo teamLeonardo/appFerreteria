@@ -62,8 +62,6 @@ export default ({ state, hide, newdata }) => {
     }, [])
 
     const closeDr = () => {
-        setDatosProvedor([])
-        setDatosTrabajador([])
         setDatosCompras({})
         setFormVa({})
         hide()
@@ -151,7 +149,7 @@ export default ({ state, hide, newdata }) => {
                                         }
                                         appearance="primary"
                                     >
-                                        Agregar
+                                        Agregar detalle
                         </Button>
                                     <Button onClick={() => closeDr()} appearance="default">Cancelar</Button>
                                 </ButtonToolbar>

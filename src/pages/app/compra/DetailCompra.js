@@ -29,9 +29,10 @@ export default ({ data }) => {
         </div>
     }
     return <div style={{ width: "100%" }} >
-        <Button appearance="primary" onClick={() => { setModalAdd(true); alert("ASDASDASD"); }} > agregar</Button>
+        <Button appearance="primary" onClick={() => { setModalAdd(true); }} > agregar</Button>
 
         <AddDetaillCompra
+            docCompra={data}
             show={modalAdd}
             close={() => setModalAdd(false)}
             newdata={(r) => setDatos([...datos, r])}
