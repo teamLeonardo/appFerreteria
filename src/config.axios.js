@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASEURL = 'http://localhost:1337'
+export const BASEURL = 'https://app-kamt.herokuapp.com/'
 
 const instance = axios.create({
     baseURL: BASEURL,
