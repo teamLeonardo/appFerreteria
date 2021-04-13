@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
 import { Button, Table } from "rsuite"
-import AddDetaillCompra from "./AddDetaillCompra"
-import EditDetailCompra from "./EditDetailCompra"
-import { deletDetaillCompra, getDataDetaillCompra } from "./state"
+import AddDetalle from "./AddDetalle"
+import EditDetalle from "./EditDetalle"
+import { deletDetaillVenta, editDetaillVenta, getDataDetaillVenta } from "./state"
+// import AddDetaillCompra from "./AddDetaillCompra"
+// import EditDetailCompra from "./EditDetailCompra"
+// import { deletDetaillCompra, getDataDetaillCompra } from "./state"
 
 export default ({ data, edit }) => {
 
@@ -18,7 +21,7 @@ export default ({ data, edit }) => {
         if (Object.keys(data).length > 0) {
             if (edit) {
                 const get = async () => {
-                    const dd = await getDataDetaillCompra(data.id)
+                    const dd = await getDataDetaillVenta(data.id)
                     setDatos(dd);
                 }
                 get()
@@ -45,21 +48,21 @@ export default ({ data, edit }) => {
     return <div style={{ width: "100%" }} >
         <Button appearance="primary" onClick={() => { setModalAdd(true); }} > agregar</Button>
 
-        <AddDetaillCompra
-            docCompra={data}
+        <AddDetalle
+            doc={data}
             show={modalAdd}
             close={() => setModalAdd(false)}
             newdata={(r) => setDatos([...datos, r])}
         />
-        <EditDetailCompra
-            docCompra={data}
+    
+        <EditDetalle
             show={modalEdit}
             close={() => setModalEdit(false)}
             newdata={(res) => {
                 setDatos([...datos.filter((item) => item.id != res.id), res])
             }}
             initData={dataEdit}
-        />
+        /> 
         <Table
             style={{ width: "100%" }}
             data={datos}
@@ -71,11 +74,6 @@ export default ({ data, edit }) => {
                         r => r.articulo.nombre && r.articulo.nombre
                     }
                 </Table.Cell>
-            </Table.Column>
-
-            <Table.Column width={100} >
-                <Table.HeaderCell>Precio de compra</Table.HeaderCell>
-                <Table.Cell dataKey="precio_compra" />
             </Table.Column>
 
             <Table.Column width={100} >
@@ -97,7 +95,7 @@ export default ({ data, edit }) => {
                                 <a onClick={() => { setDataEdit(rowData); setModalEdit(true) }}> Edit </a> |{' '}
                                 <a onClick={async () => {
                                     try {
-                                        await deletDetaillCompra(rowData.id)
+                                        await deletDetaillVenta(rowData.id)
                                         setDatos(datos.filter((item) => item.id != rowData.id))
                                     } catch (error) {
                                         console.log(error);

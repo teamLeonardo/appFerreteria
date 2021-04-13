@@ -1,65 +1,36 @@
 import { useEffect, useState } from "react"
-import { Button, ButtonToolbar, Col, ControlLabel, DatePicker, Drawer, Form, FormControl, FormGroup, Grid, HelpBlock, Input, InputNumber, Row, SelectPicker, Uploader } from "rsuite"
-import { getDataProvedor } from "../provedor/state"
+import { Button, ButtonToolbar, Col, ControlLabel, DatePicker, Drawer, Form, FormControl, FormGroup, Grid, HelpBlock, Row, SelectPicker } from "rsuite"
+import { getDataCliente } from "../cliente/state"
 import { getDataPersonal } from "../personal/state"
-import { addCompra } from "./state";
-import DetailCompra from "./DetailCompra";
+import ListDetalle from "./ListDetalle"
+import { addVenta } from "./state"
+// import { getDataProvedor } from "../provedor/state"
+// import { getDataPersonal } from "../personal/state"
+// import { addCompra } from "./state";
+// import DetailCompra from "./DetailCompra";
 
 export default ({ state, hide, newdata }) => {
     const [formva, setFormVa] = useState({
-        provedor: {},
+        cliente: {},
         trabajador: {},
-        tipo_compra: "",
         fecha: new Date(),
-        igv: 0,
-        serie: 0,
-
+        total: 0
     })
-    const [datosProvedor, setDatosProvedor] = useState([])
+    const [datosCliente, setDatosCliente] = useState([])
     const [datosTrabajador, setDatosTrabajador] = useState([])
 
-    const [datosCompra, setDatosCompras] = useState({})
+    const [datosVentas, setDatosVentas] = useState({})
 
-    const selecDa = [
-        {
-            "label": "especiales",
-            "value": "especiales",
-        },
-        {
-            "label": "anticipadas",
-            "value": "anticipadas",
-        },
-        {
-            "label": "temporales",
-            "value": "temporales",
-        },
-        {
-            "label": "ciclicas",
-            "value": "ciclicas",
-        },
-        {
-            "label": "urgencia",
-            "value": "urgencia",
-        },
-        {
-            "label": "oportunas",
-            "value": "oportunas",
-        },
-        {
-            "label": "rutinarias",
-            "value": "rutinarias",
-        }
-    ]
     useEffect(() => {
         const get = async () => {
-            setDatosProvedor([... await getDataProvedor()].map((valu) => ({ label: valu.razonSocial, value: valu }), []));
+            setDatosCliente([... await getDataCliente()].map((valu) => ({ label: valu.nombre, value: valu }), []));
             setDatosTrabajador([... await getDataPersonal()].map((valu) => ({ label: valu.nombre, value: valu }), []));
         }
         get()
     }, [])
 
     const closeDr = () => {
-        setDatosCompras({})
+        setDatosVentas({})
         setFormVa({})
         hide()
     }
@@ -79,17 +50,19 @@ export default ({ state, hide, newdata }) => {
                             onChange={(value) => setFormVa(value)}
                             formValue={formva}
                         >
+
                             <FormGroup>
-                                <ControlLabel>Provedor</ControlLabel>
+                                <ControlLabel>Clientes</ControlLabel>
                                 <FormControl
-                                    name="provedor"
+                                    name="cliente"
                                     accepter={SelectPicker}
-                                    data={datosProvedor}
+                                    data={datosCliente}
                                     style={{ width: 120 }}
                                     searchable={false}
                                 />
                                 <HelpBlock tooltip>Requerido</HelpBlock>
                             </FormGroup>
+
                             <FormGroup>
                                 <ControlLabel>trabajador</ControlLabel>
                                 <FormControl
@@ -103,42 +76,22 @@ export default ({ state, hide, newdata }) => {
                             </FormGroup>
 
                             <FormGroup>
-                                <ControlLabel>tipo compra</ControlLabel>
-                                <FormControl
-                                    name="tipo_compra"
-                                    accepter={SelectPicker}
-                                    data={selecDa}
-                                    style={{ width: 120 }}
-                                    searchable={false}
-                                />
-                                <HelpBlock tooltip>Requerido</HelpBlock>
-                            </FormGroup>
-                            <FormGroup>
                                 <ControlLabel>Fecha</ControlLabel>
-                                <FormControl name="fecha" accepter={DatePicker} />
+                                <FormControl name="fecha" format="YYYY-MM-DD HH:mm:ss" accepter={DatePicker} />
                                 <HelpBlock tooltip>Requerido</HelpBlock>
                             </FormGroup>
-                            <FormGroup>
-                                <ControlLabel>IGV porcentaje</ControlLabel>
-                                <FormControl name="igv" accepter={InputNumber} />
-                                <HelpBlock tooltip>Requerido</HelpBlock>
-                            </FormGroup>
-                            <FormGroup>
-                                <ControlLabel>Serie</ControlLabel>
-                                <FormControl name="serie" accepter={InputNumber} />
-                                <HelpBlock tooltip>Requerido</HelpBlock>
-                            </FormGroup>
+
                             <FormGroup>
                                 <ButtonToolbar>
                                     <Button
                                         type="submit"
-                                        disabled={Object.keys(datosCompra).length <= 0 ? false : true}
+                                        disabled={Object.keys(datosVentas).length <= 0 ? false : true}
                                         onClick={
                                             async () => {
                                                 try {
-                                                    const d = await addCompra(formva)
+                                                    const d = await addVenta(formva)
                                                     newdata(d);
-                                                    setDatosCompras(d)
+                                                    setDatosVentas(d)
                                                 } catch (error) {
                                                     console.log(error);
                                                     closeDr()
@@ -155,7 +108,7 @@ export default ({ state, hide, newdata }) => {
                         </Form>
                     </Col>
                     <Col xs={12}>
-                        <DetailCompra data={datosCompra} />
+                         <ListDetalle data={datosVentas} /> 
                     </Col>
                 </Row>
             </Grid>

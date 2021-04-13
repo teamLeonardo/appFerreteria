@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import { Button, ButtonToolbar, ControlLabel, Form, FormControl, FormGroup, HelpBlock, InputNumber, Modal, SelectPicker } from "rsuite"
 import { getDataArticulo } from "../articulo/state"
-import { addDetaillCompra } from "./state"
+import { addDetaillVenta } from "./state"
 
-export default ({ show, close, newdata, docCompra }) => {
+export default ({ show, close, newdata, doc }) => {
     const [data, setdata] = useState({
-        precio_compra: 0,
         articulo: {},
-        cantidad: 0,
-        total: 0
+        precio: 0,
+        cantidad: 1,
+        descuento: 0,
+        total: 0,
     })
     const [dataArticle, setDataArticle] = useState([])
 
@@ -17,20 +18,34 @@ export default ({ show, close, newdata, docCompra }) => {
             setDataArticle([... await getDataArticulo()].map(value => ({ label: value.nombre, value: value }), []));
         }
         get()
-    }, [docCompra])
+    }, [doc])
 
     const limpiar = () => {
         setdata({
-            precio_compra: 0,
             articulo: {},
+            precio: 0,
             cantidad: 0,
-            total: 0
+            descuento: 0,
+            total: 0,
         })
     }
 
     const handleChange = (value) => {
-        const d = (parseFloat(value.precio_compra)) * value.cantidad
-        setdata({ ...value, total: d })
+        let desIgv = 0
+        if (value.articulo != null) {
+
+            const d = ((parseFloat(value.articulo.precio) + (parseFloat(value.articulo.precio) * 0.18)) * value.cantidad)
+            desIgv = d - value.descuento
+        }
+        setdata({
+            ...value,
+            total: parseFloat(desIgv).toFixed(2),
+            precio: (value.articulo != null && value.articulo.precio) ?
+                parseFloat(value.articulo.precio) + (parseFloat(value.articulo.precio) * 0.18)
+                :
+                value.precio
+        })
+
     }
 
     return <Modal overflow show={show} onHide={() => { close(); limpiar() }}>
@@ -43,16 +58,6 @@ export default ({ show, close, newdata, docCompra }) => {
                 onChange={handleChange}
                 formValue={data}
             >
-
-                <FormGroup>
-                    <ControlLabel>Precio de compra</ControlLabel>
-                    <FormControl
-                        name="precio_compra"
-                        accepter={InputNumber}
-                    />
-                    <HelpBlock tooltip>Requerido</HelpBlock>
-                </FormGroup>
-
                 <FormGroup>
                     <ControlLabel>Articulo</ControlLabel>
                     <FormControl
@@ -65,9 +70,26 @@ export default ({ show, close, newdata, docCompra }) => {
                 </FormGroup>
 
                 <FormGroup>
+                    <ControlLabel>Precio</ControlLabel>
+                    <FormControl
+                        name="precio"
+                        accepter={InputNumber}
+                        disabled={true}
+                    />
+                    <HelpBlock tooltip>Requerido</HelpBlock>
+                </FormGroup>
+                <FormGroup>
                     <ControlLabel>Cantidad</ControlLabel>
                     <FormControl
                         name="cantidad"
+                        accepter={InputNumber}
+                    />
+                    <HelpBlock tooltip>Requerido</HelpBlock>
+                </FormGroup>
+                <FormGroup>
+                    <ControlLabel>Descuento</ControlLabel>
+                    <FormControl
+                        name="descuento"
                         accepter={InputNumber}
                     />
                     <HelpBlock tooltip>Requerido</HelpBlock>
@@ -90,7 +112,7 @@ export default ({ show, close, newdata, docCompra }) => {
                             onClick={
                                 async () => {
                                     try {
-                                        const d = await addDetaillCompra({ ...data, ingreso: docCompra })
+                                        const d = await addDetaillVenta({ ...data, venta: doc })
                                         console.log(d);
                                         newdata(d)
                                         limpiar()

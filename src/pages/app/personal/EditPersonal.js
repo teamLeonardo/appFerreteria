@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Button, ButtonToolbar, ControlLabel, DatePicker, Drawer, Form, FormControl, FormGroup, HelpBlock, InputNumber, SelectPicker } from "rsuite"
-import { editClient, editPersonal } from "./state"
+import {  editPersonal } from "./state"
 
 export default ({ state, hide, datos, newdata }) => {
     const [formva, setFormVa] = useState()

@@ -1,9 +1,9 @@
 import instance from "../../../config.axios"
 
-const RUTA1 = "/ingresos/"
-const RUTA2 = "/detalle-ingresos/"
+const RUTA1 = "/ventas/"
+const RUTA2 = "/detalle-ventas/"
 
-export const getDataCompra = async (id) => {
+export const getDataVenta = async (id) => {
     try {
         if (id) {
             return (await instance.get(`${RUTA1}${id}`)).data
@@ -13,24 +13,24 @@ export const getDataCompra = async (id) => {
         throw error
     }
 }
-export const addCompra = async (payload) => {
+export const addVenta = async (payload) => {
     try {
         return (await instance.post(RUTA1, payload)).data
     } catch (error) {
         throw error
     }
 }
-export const editCompra = async (id, payload) => {
+export const editVenta = async (id, payload) => {
     try {
         return (await instance.put(RUTA1 + id, payload)).data
     } catch (error) {
         throw error
     }
 }
-export const deletCompra = async (id) => {
-    try {     
+export const deletVenta = async (id) => {
+    try {
 
-        return (await instance.delete(RUTA1+ "anaDetail/" + id)).data
+        return (await instance.delete(RUTA1 + "all/" + id)).data
 
     } catch (error) {
         throw error
@@ -38,10 +38,10 @@ export const deletCompra = async (id) => {
 }
 ///
 
-export const getDataDetaillCompra = async (id) => {
+export const getDataDetaillVenta = async (id) => {
     try {
         if (id) {
-            return (await instance.get(`${RUTA2}ingreso/${id}`)).data
+            return (await instance.get(`${RUTA2}venta/${id}`)).data
         }
         return (await instance.get(RUTA2)).data
     } catch (error) {
@@ -49,21 +49,21 @@ export const getDataDetaillCompra = async (id) => {
     }
 }
 
-export const addDetaillCompra = async (payload) => {
+export const addDetaillVenta = async (payload) => {
     try {
         return (await instance.post(RUTA2, payload)).data
     } catch (error) {
         throw error
     }
 }
-export const editDetaillCompra = async (id, payload) => {
+export const editDetaillVenta = async (id, payload) => {
     try {
         return (await instance.put(RUTA2 + id, payload)).data
     } catch (error) {
         throw error
     }
 }
-export const deletDetaillCompra = async (id) => {
+export const deletDetaillVenta = async (id) => {
     try {
         return (await instance.delete(RUTA2 + id)).data
     } catch (error) {
