@@ -57,7 +57,12 @@ export default ({ children }) => {
                                     }
 
                                 </Dropdown>
-                              
+                                <Nav.Item
+                                    onSelect={()=>{ localStorage.getItem("user") && localStorage.removeItem("user"); push("/login"); }}
+                                    icon={<Icon icon="dashboard" />}
+                                >
+                                    Cerrar session
+                                </Nav.Item>
                             </Nav>
                         </Sidenav.Body>
                     </Sidenav>
