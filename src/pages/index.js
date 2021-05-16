@@ -32,7 +32,7 @@ export default () => {
                 <SegurityRouter type="private" exact={true} path={ROUTER.app.page.personal} component={() => <LayoutDashboard><Personal /></LayoutDashboard>} />
                 <SegurityRouter type="private" exact={true} path={ROUTER.app.page.provedor} component={() => <LayoutDashboard><Provedor /></LayoutDashboard>} />
                 <SegurityRouter type="private" exact={true} path={ROUTER.app.page.compra} component={() => <LayoutDashboard><Compra /></LayoutDashboard>} />
-                <Route exact path="/" render={() => <Redirect to={ROUTER.login.page} />} />
+                <Route exact path="/" component={() => <Redirect from="/" to={ROUTER.login.page} />} />
             </IonRouterOutlet>
         </IonReactRouter>
     </AuthContextProvider>

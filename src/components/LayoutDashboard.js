@@ -1,6 +1,6 @@
 
 import { useHistory, useLocation } from 'react-router';
-import { ROUTER , PATH_APP} from '../pages/router';
+import { ROUTER, PATH_APP } from '../pages/router';
 // import * from "r"
 import { Container, Header, Content, Sidebar, Nav, Dropdown, Sidenav, Icon } from 'rsuite';
 
@@ -58,7 +58,14 @@ export default ({ children }) => {
 
                                 </Dropdown>
                                 <Nav.Item
-                                    onSelect={()=>{ localStorage.getItem("user") && localStorage.removeItem("user"); push("/login"); }}
+                                    onSelect={() => {
+                                        if (localStorage.getItem("user")) {
+
+                                            localStorage.removeItem("user");
+                                            push("/");
+                                            window.location = "/"
+                                        }
+                                    }}
                                     icon={<Icon icon="dashboard" />}
                                 >
                                     Cerrar session
