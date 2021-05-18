@@ -14,12 +14,12 @@ export default () => {
     })
     const validar = async () => {
         try {
+            console.log(formva);
             const data = (await instance.post("/trabajadors/auth", formva)).data
-            console.log(data);
             LoginInt(data)
             push("/app/dashboard")
         } catch (error) {
-
+            alert(" " +error)
         }
     }
     return (
@@ -53,7 +53,6 @@ export default () => {
                         </FlexboxGrid.Item>
                     </FlexboxGrid>
                 </Content>
-                <Footer>Footer</Footer>
             </Container>
         </div>
     )
