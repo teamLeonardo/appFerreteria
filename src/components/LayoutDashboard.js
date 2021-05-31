@@ -2,25 +2,69 @@
 import { useHistory, useLocation } from 'react-router';
 import { ROUTER, PATH_APP } from '../pages/router';
 // import * from "r"
-import { Container, Header, Content, Sidebar, Nav, Dropdown, Sidenav, Icon } from 'rsuite';
+import { Container, Header, Content, Sidebar, Nav, Dropdown, Sidenav, Icon, Navbar } from 'rsuite';
+import { useState } from 'react';
 
+const NavToggle = ({ expand, onChange }) => {
+    let { push } = useHistory()
+    return (
+        <Navbar appearance="subtle" className="nav-toggle">
+            <Navbar.Body>
+                <Nav>
+                    <Dropdown
+                        placement="topStart"
+                        trigger="click"
+                        renderTitle={children => {
+                            return <Icon style={{
+                                width: 56,
+                                height: 56,
+                                lineHeight: '56px',
+                                textAlign: 'center'
+                            }} icon="cog" />;
+                        }}
+                    >
+                        <Dropdown.Item
+                            onSelect={() => {
+                                if (localStorage.getItem("user")) {
 
+                                    localStorage.removeItem("user");
+                                    push("/");
+                                    window.location = "/"
+                                }
+                            }}
+                        >Cerrar session</Dropdown.Item>
+                    </Dropdown>
+                </Nav>
+
+                <Nav pullRight>
+                    <Nav.Item onClick={onChange} style={{ width: 56, textAlign: 'center' }}>
+                        <Icon icon={expand ? 'angle-left' : 'angle-right'} />
+                    </Nav.Item>
+                </Nav>
+            </Navbar.Body>
+        </Navbar>
+    );
+};
 export default ({ children }) => {
 
     let { pathname } = useLocation()
+    let [exp, setExp] = useState(false)
     let { push } = useHistory()
     let ar = Object.values(ROUTER.app.page).map(value => value.split(PATH_APP)[1] !== "dashboard" ? value.split(PATH_APP)[1] : null)
     let validacion = ar.indexOf(pathname.split(PATH_APP)[1]) > -1 ? "manteniminento" : "3"
+
+
     return (
         <div className="show-fake-browser sidebar-page" style={{ height: "100% !important" }}  >
             <Container style={{ height: "100% !important" }}>
                 <Sidebar
                     style={{ display: 'flex', flexDirection: 'column' }}
-                    width={true ? 260 : 56}
+                    width={exp ? 260 : 56}
                     collapsible
+
                     style={{ height: "100%" }}
                 >
-                    <Sidenav defaultOpenKeys={[validacion]} expanded={true} appearance="subtle">
+                    <Sidenav defaultOpenKeys={[validacion]} expanded={exp} style={{ height: exp ? "calc(100% - 56px)" : "calc(100% - 113px)" }} appearance="inverse">
 
                         <Sidenav.Body>
                             <Nav>
@@ -35,7 +79,7 @@ export default ({ children }) => {
 
                                 <Dropdown
                                     eventKey="manteniminento"
-                                    trigger="hover"
+                                    trigger="click"
                                     title="manteniminento"
                                     icon={<Icon icon="magic" />}
                                     placement="rightStart"
@@ -57,23 +101,10 @@ export default ({ children }) => {
                                     }
 
                                 </Dropdown>
-                                <Nav.Item
-                                    onSelect={() => {
-                                        if (localStorage.getItem("user")) {
-
-                                            localStorage.removeItem("user");
-                                            push("/");
-                                            window.location = "/"
-                                        }
-                                    }}
-                                    icon={<Icon icon="dashboard" />}
-                                >
-                                    Cerrar session
-                                </Nav.Item>
                             </Nav>
                         </Sidenav.Body>
                     </Sidenav>
-
+                    <NavToggle expand={exp} onChange={() => setExp(!exp)} />
                 </Sidebar>
 
                 <Container >
