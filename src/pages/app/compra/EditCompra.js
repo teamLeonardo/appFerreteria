@@ -152,7 +152,7 @@ export default ({ state, hide, newdata, datos }) => {
                         </Form>
                     </Col>
                     <Col xs={12}>
-                        <DetailCompra data={datosCompra} edit={true}/>
+                        <DetailCompra data={datosCompra} edit={true} />
                     </Col>
                 </Row>
             </Grid>

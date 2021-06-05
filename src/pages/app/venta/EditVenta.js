@@ -5,15 +5,15 @@ import { getDataPersonal } from "../personal/state"
 import { addVenta } from "./state";
 import ListDetalle from "./ListDetalle";
 
-export default ({ state, hide, newdata, datos }) => {
+export default ({ state, hide, newdata, datos, newDA }) => {
 
     const [formva, setFormVa] = useState({})
-    
+
     const [datosCliente, setDatosCliente] = useState([])
     const [datosTrabajador, setDatosTrabajador] = useState([])
 
     const [datosCompra, setDatosCompras] = useState({})
-  
+
     useEffect(() => {
         const get = async () => {
             setDatosCliente([... await getDataCliente()].map((valu) => ({ label: valu.nombre, value: valu }), []));
@@ -45,7 +45,7 @@ export default ({ state, hide, newdata, datos }) => {
                             onChange={(value) => setFormVa(value)}
                             formValue={formva}
                         >
-                            
+
                             <FormGroup>
                                 <ControlLabel>Clientes</ControlLabel>
                                 <FormControl
@@ -103,7 +103,7 @@ export default ({ state, hide, newdata, datos }) => {
                         </Form>
                     </Col>
                     <Col xs={12}>
-                        <ListDetalle data={datosCompra} edit={true}/>
+                        <ListDetalle data={datosCompra} edit={true} newDA={newDA} />
                     </Col>
                 </Row>
             </Grid>

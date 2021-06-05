@@ -57,7 +57,7 @@ export default () => {
                 <Modal.Title>Detalle de compra</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <DetailCompra data={detaillData} edit={true} />
+                <DetailCompra newDataCompra={(res) => { setData([...data.filter((item) => item.id != res.id), ...[res]]) }} data={detaillData} edit={true} />
             </Modal.Body>
         </Modal>
         <Table

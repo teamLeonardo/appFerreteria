@@ -57,6 +57,9 @@ export default () => {
             state={show2}
             hide={() => setShow2(false)}
             datos={editData}
+            newDA={(res) => {
+                setData([...data.filter((item) => item.id != res.id), ...[res]])
+            }}
             newdata={(res) => {
                 setData([...data.filter((item) => item.id != res.id), ...[res]])
             }}
@@ -67,7 +70,7 @@ export default () => {
                 <Modal.Title>Detalle de Venta</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <ListDetalle data={detaillData} edit={true} />
+                <ListDetalle data={detaillData} edit={true} newDA={(res) => { setData([...data.filter((item) => item.id != res.id), ...[res]]) }} />
             </Modal.Body>
         </Modal>
 
@@ -114,10 +117,11 @@ export default () => {
 
                 <Table.Cell>
                     {rowData => {
+                        console.log(rowData);
                         return (
                             <span>
-                                <a onClick={()=>openDetalle(rowData)}> detalle </a> |{' '}
-                                <a onClick={()=>openEditar(rowData)}> Edit </a> |{' '}
+                                <a onClick={() => openDetalle(rowData)}> detalle </a> |{' '}
+                                <a onClick={() => openEditar(rowData)}> Edit </a> |{' '}
                                 <a onClick={async () => {
                                     try {
                                         await deletVenta(rowData.id)

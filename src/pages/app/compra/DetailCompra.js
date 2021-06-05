@@ -4,7 +4,7 @@ import AddDetaillCompra from "./AddDetaillCompra"
 import EditDetailCompra from "./EditDetailCompra"
 import { deletDetaillCompra, getDataDetaillCompra } from "./state"
 
-export default ({ data, edit }) => {
+export default ({ data, edit, newDataCompra }) => {
 
     const [modalAdd, setModalAdd] = useState(false)
 
@@ -50,6 +50,7 @@ export default ({ data, edit }) => {
             show={modalAdd}
             close={() => setModalAdd(false)}
             newdata={(r) => setDatos([...datos, r])}
+            newDataCompra={newDataCompra}
         />
         <EditDetailCompra
             docCompra={data}

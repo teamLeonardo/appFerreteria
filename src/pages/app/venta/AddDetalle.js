@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { Button, ButtonToolbar, ControlLabel, Form, FormControl, FormGroup, HelpBlock, InputNumber, Modal, SelectPicker } from "rsuite"
 import { getDataArticulo } from "../articulo/state"
-import { addDetaillVenta } from "./state"
+import { addDetaillVenta, editVenta } from "./state"
 
-export default ({ show, close, newdata, doc }) => {
+export default ({ show, close, newdata, doc , newDataVenta }) => {
     const [data, setdata] = useState({
         articulo: {},
         precio: 0,
@@ -113,7 +113,8 @@ export default ({ show, close, newdata, doc }) => {
                                 async () => {
                                     try {
                                         const d = await addDetaillVenta({ ...data, venta: doc })
-                                        console.log(d);
+                                        const newDatosVenta = await editVenta(doc._id, { ...doc, total: (doc.total + d.total) })
+                                        newDataVenta(newDatosVenta)
                                         newdata(d)
                                         limpiar()
                                         close()
