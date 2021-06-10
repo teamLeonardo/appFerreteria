@@ -108,7 +108,7 @@ export default ({ state, hide, newdata }) => {
                         </Form>
                     </Col>
                     <Col xs={12}>
-                         <ListDetalle data={datosVentas} /> 
+                        <ListDetalle data={datosVentas} edit={false} newDA={(re) => { console.log(re); }} />
                     </Col>
                 </Row>
             </Grid>
