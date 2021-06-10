@@ -3,7 +3,7 @@ import { Button, ButtonToolbar, ControlLabel, Form, FormControl, FormGroup, Help
 import { getDataArticulo } from "../articulo/state"
 import { addDetaillVenta, editVenta } from "./state"
 
-export default ({ show, close, newdata, doc , newDataVenta }) => {
+export default ({ show, close, newdata, doc, newDataVenta }) => {
     const [data, setdata] = useState({
         articulo: {},
         precio: 0,
@@ -113,7 +113,7 @@ export default ({ show, close, newdata, doc , newDataVenta }) => {
                                 async () => {
                                     try {
                                         const d = await addDetaillVenta({ ...data, venta: doc })
-                                        const newDatosVenta = await editVenta(doc._id, { total: (doc.total + d.total) })
+                                        const newDatosVenta = await editVenta(doc._id, { total: ((doc.total ? doc.total : 0) + d.total) })
                                         newDataVenta(newDatosVenta)
                                         newdata(d)
                                         limpiar()
