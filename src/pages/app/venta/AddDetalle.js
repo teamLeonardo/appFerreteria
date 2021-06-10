@@ -113,7 +113,7 @@ export default ({ show, close, newdata, doc , newDataVenta }) => {
                                 async () => {
                                     try {
                                         const d = await addDetaillVenta({ ...data, venta: doc })
-                                        const newDatosVenta = await editVenta(doc._id, { ...doc, total: (doc.total + d.total) })
+                                        const newDatosVenta = await editVenta(doc._id, { total: (doc.total + d.total) })
                                         newDataVenta(newDatosVenta)
                                         newdata(d)
                                         limpiar()
