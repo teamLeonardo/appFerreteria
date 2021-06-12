@@ -3,9 +3,6 @@ import { Button, Table } from "rsuite"
 import AddDetalle from "./AddDetalle"
 import EditDetalle from "./EditDetalle"
 import { deletDetaillVenta, editDetaillVenta, getDataDetaillVenta } from "./state"
-// import AddDetaillCompra from "./AddDetaillCompra"
-// import EditDetailCompra from "./EditDetailCompra"
-// import { deletDetaillCompra, getDataDetaillCompra } from "./state"
 
 export default ({ data, edit ,newDA }) => {
 

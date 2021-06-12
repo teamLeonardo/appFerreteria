@@ -80,7 +80,6 @@ export default ({ state, hide, newdata, datos, newDA }) => {
                                 <ButtonToolbar>
                                     <Button
                                         type="submit"
-                                        //disabled={Object.keys(datosCompra).length <= 0 ? false : true}
                                         onClick={
                                             async () => {
                                                 try {

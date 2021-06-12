@@ -4,10 +4,6 @@ import { getDataCliente } from "../cliente/state"
 import { getDataPersonal } from "../personal/state"
 import ListDetalle from "./ListDetalle"
 import { addVenta } from "./state"
-// import { getDataProvedor } from "../provedor/state"
-// import { getDataPersonal } from "../personal/state"
-// import { addCompra } from "./state";
-// import DetailCompra from "./DetailCompra";
 
 export default ({ state, hide, newdata }) => {
     const [formva, setFormVa] = useState({
@@ -38,7 +34,7 @@ export default ({ state, hide, newdata }) => {
     return <Drawer full size="lg" placement="right" show={state} onHide={() => { closeDr() }}>
 
         <Drawer.Header>
-            <Drawer.Title>Realizar un Compra</Drawer.Title>
+            <Drawer.Title>Realizar un Venta</Drawer.Title>
         </Drawer.Header>
         <Drawer.Body>
 
