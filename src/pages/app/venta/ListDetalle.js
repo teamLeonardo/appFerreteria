@@ -40,7 +40,7 @@ export default ({ data, edit ,newDA }) => {
                 alignItems: "center"
             }}
         >
-            no se a creado el documento de compra
+            no se a creado el documento de venta
         </div>
     }
 

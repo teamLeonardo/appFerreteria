@@ -46,7 +46,7 @@ export default ({ show, close, newdata, initData }) => {
     const { Paragraph } = Placeholder;
     return <Modal overflow show={show} onHide={() => { close() }}>
         <Modal.Header>
-            <Modal.Title>Actualizar detalle de compra</Modal.Title>
+            <Modal.Title>Actualizar detalle de Venta</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             {

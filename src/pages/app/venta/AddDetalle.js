@@ -50,7 +50,7 @@ export default ({ show, close, newdata, doc, newDataVenta }) => {
 
     return <Modal overflow show={show} onHide={() => { close(); limpiar() }}>
         <Modal.Header>
-            <Modal.Title>Agregar detalle de compra</Modal.Title>
+            <Modal.Title>Agregar detalle de Venta</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Form

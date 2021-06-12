@@ -100,7 +100,7 @@ export default ({ state, hide, newdata }) => {
                                         }
                                         appearance="primary"
                                     >
-                                        Crear compra
+                                        Crear Venta
                         </Button>
                                     <Button onClick={() => closeDr()} appearance="default">Cancelar</Button>
                                 </ButtonToolbar>

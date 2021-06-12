@@ -95,7 +95,7 @@ export default ({ state, hide, newdata, datos, newDA }) => {
                                         }
                                         appearance="primary"
                                     >
-                                        Actualizar compra
+                                        Actualizar Venta
                         </Button>
                                     <Button onClick={() => closeDr()} appearance="default">Cancelar</Button>
                                 </ButtonToolbar>
